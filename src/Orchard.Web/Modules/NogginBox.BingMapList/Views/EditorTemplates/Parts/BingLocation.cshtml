@@ -1,0 +1,201 @@
+﻿@model NogginBox.BingMapList.ViewModels.EditBingLocationViewModel
+@{
+	Style.Include("map");
+	Script.Require("jQuery");
+	Script.Include("http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0");
+	Script.Include("maplist.js");
+	
+	// Set size with units
+	var width = (Model.Width != null) ? Model.Width + "pt" : "100%";
+	var height = Model.Height + "pt";
+}
+@using(Script.Foot()) {
+<script type="text/javascript">
+	var map;
+	var pin;
+	var icon = "@Ajax.JavaScriptStringEncode(Model.MapIcon)";
+
+	function setPin(loc) {
+		map.entities.remove(pin);
+		pin = newPin(loc, "@Model.MapIconFolder", icon);
+		map.entities.push(pin);
+	}
+
+	function onMapDClick(e) {
+		if (e.targetType === "map") {
+			var p = new Microsoft.Maps.Point(e.getX(), e.getY());
+			var loc = e.target.tryPixelToLocation(p);
+			setPin(loc);
+
+			$("#@Html.IdFor(m => m.LatitudeStr)").val(loc.latitude);
+			$("#@Html.IdFor(m => m.LongitudeStr)").val(loc.longitude);
+			e.handled = true;
+		}
+	}
+
+	function getDimension(d) {
+		return (d === "") ? "100%" : parseInt(d, 10);
+	}
+
+	function getLocationFromEditor() {
+		return newLocation($("#@Html.IdFor(m => m.LatitudeStr)").val(), $("#@Html.IdFor(m => m.LongitudeStr)").val());
+	}
+
+	function onRadioIcon() {
+		icon = $("input[name='@Html.NameFor(m => m.MapIcon)']:checked").val();
+		setPin(getLocationFromEditor());
+	}
+
+	function resetMapSize() {
+		var w = getDimension($("#@Html.IdFor(m => m.Width)").val());
+		var h = getDimension($("#@Html.IdFor(m => m.Height)").val());
+		$("#BingEditMap").width(w);
+		$("#BingEditMap").height(h);
+		map.setOptions({width: w, height: h});
+	}
+
+	function onTextHeightChange() {
+		resetMapSize();
+	}
+
+	function onTextWidthChange() {
+		resetMapSize();
+	}
+
+	function onTextLatLongChange() {
+		setPin(getLocationFromEditor());
+	}
+
+	function onTextMapTypeChange() {
+		map.setView({mapTypeId: $("#@Html.IdFor(m => m.MapType)").val()});
+	}
+
+	function onViewChange() {
+		var z = Math.floor(map.getZoom());
+		$("#@Html.IdFor(m => m.Zoom)").val(z);
+	}
+
+	function onTypeChange() {
+		$("#@Html.IdFor(m => m.MapType)").val(map.getMapTypeId());
+	}
+
+	function onZoomTextSet() {
+		var z = parseInt($("#@Html.IdFor(m => m.Zoom)").val(), 10);
+		map.setView({zoom: z});
+	}
+
+	function initMap() {
+		var loc = newLocation(@Model.LatitudeStr, @Model.LongitudeStr);
+		map = newMap("BingEditMap", loc, @Model.Zoom, "@(Ajax.JavaScriptStringEncode(Model.MapType))");
+		pin = newPin(loc, "@Model.MapIconFolder", icon);
+		map.entities.push(pin);
+
+		Microsoft.Maps.Events.addHandler(map, "viewchangeend", onViewChange);
+		Microsoft.Maps.Events.addHandler(map, "dblclick", onMapDClick);
+		Microsoft.Maps.Events.addHandler(map, "maptypechanged", onTypeChange);
+	}
+	$(window).load(initMap);
+
+	$(function() {
+		$("fieldset legend").expandoControl(function (controller) { return controller.nextAll(".expando"); }, { collapse: true, remember: false });
+		$("#@Html.IdFor(m => m.Zoom)").change(onZoomTextSet);
+		$("#@Html.IdFor(m => m.Width)").change(onTextWidthChange);
+		$("#@Html.IdFor(m => m.Height)").change(onTextHeightChange);
+		$("#@Html.IdFor(m => m.LatitudeStr)").change(onTextLatLongChange);
+		$("#@Html.IdFor(m => m.LongitudeStr)").change(onTextLatLongChange);
+		$("#@Html.IdFor(m => m.MapType)").change(onTextMapTypeChange);
+		$("input[name='@Html.NameFor(m => m.MapIcon)']").click(onRadioIcon);
+	});
+</script>
+}
+<fieldset>
+	<legend>Bing location</legend>
+	<div class="editor-field">
+		@Html.EditorFor(m => m.IsEnabled)
+		<label for="@Html.FieldIdFor(m => m.IsEnabled)" class="forcheckbox">@T("Show map")</label>
+		@Html.ValidationMessageFor(m => m.IsEnabled)
+	</div>
+	<div id="BingEditMap" class="BingLocation" style="position:relative; width:@(width); height:@(height);"></div>
+	<p style="clear: both;">Double click on the map to set your location.</p>	
+</fieldset>
+
+
+<fieldset>
+	<legend>@T("Map properties")</legend>
+	<div class="expando">
+		
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Width)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Width)
+			@Html.ValidationMessageFor(m => m.Width)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Height)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Height)
+			@Html.ValidationMessageFor(m => m.Height)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.LatitudeStr)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.LatitudeStr)
+			@Html.ValidationMessageFor(m => m.LatitudeStr)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.LongitudeStr)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.LongitudeStr)
+			@Html.ValidationMessageFor(m => m.LongitudeStr)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Zoom)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Zoom)
+			@Html.ValidationMessageFor(m => m.Zoom)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.MapType)
+		</div>
+		<div class="editor-field">
+			@Html.DropDownListFor(m => m.MapType, Model.MapTypeList)
+			@Html.ValidationMessageFor(m => m.MapType)
+		</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Part of map list</legend>
+	<div class="editor-field">
+		@Html.DropDownListFor(m => m.BingMapListId,
+			Model.BingMapLists
+			.Select(ml => new SelectListItem {
+				Selected = ml.Id == Model.BingMapListId,
+			Text = ml.Name,
+			Value = ml.Id.ToString()
+		}),
+		"None")
+		@Html.ValidationMessageFor(m => m.BingMapListId)
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Map icon</legend>
+	<label class="icon">@Html.RadioButton("MapIcon", "", String.IsNullOrEmpty(Model.MapIcon)) Default</label>
+	@foreach (var mapIcon in Model.PossibleMapIcons)
+	{
+		<label class="icon">@Html.RadioButton("MapIcon", mapIcon, mapIcon == Model.MapIcon) <img src="@Model.MapIconFolder@mapIcon" alt="Icon: @mapIcon" /></label>
+	}
+	<p style="clear: both;">To add more icon options upload icon images to the mapicons folder in @Html.ActionLink("media", "Index", "Admin", new {area = "Orchard.MediaLibrary"}, null).<br />
+	Map icons can be no bigger than 25 x 39 pixels or they will get cropped.</p>
+</fieldset>

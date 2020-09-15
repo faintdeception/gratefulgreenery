@@ -1,0 +1,516 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Antic+Didone|Nunito');
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #803094;
+}
+.progress{
+    border-radius:0;
+}
+.nav-tabs
+{
+    margin-bottom:20px;
+}
+
+.strainEffectsBox{
+    min-height:370px;
+}
+
+a[href$=".pdf"] {
+    background-image: url(../img/icons/adobe-acrobat-pdf-file-512.png);
+    background-position: center left;
+    background-repeat: no-repeat;
+    padding-left: 35px;
+    height: 35px;
+    display: inline-block;
+    padding-top: 10px;
+    background-size: 37px 37px;
+}
+
+.dropdown-menu > li > a {
+    color:white;
+}
+
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: lawngreen;
+    background-color: #803094;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    color: lawngreen;
+    text-decoration: none;
+    outline: 0;
+    background-color: #f8f5f0;
+}
+
+.dropdown-menu {
+    background: #803094;
+    border: 0;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0);
+    -webkit-background-clip: inherit;
+    background-clip: inherit;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+        background: #803094;
+        color:#fff;
+    }
+
+        .dropdown-menu > .active > a:hover {
+            color: lawngreen;
+        }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        margin-top: -6px;
+    }
+
+.strainHeading > a {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+}
+
+    .strainHeading > a:hover {
+        color: #fff;
+    }
+
+.strainHeading > a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff ;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.strainHeading > a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+
+
+
+.ggHidden {
+    display: none;
+    visibility: hidden;
+}
+
+body {
+    font-family: "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333333;
+}
+
+.contactSubmit {
+    background-color: #803094 !important;
+    color: #ffffff !important;
+    border: 0 solid transparent !important;
+}
+
+
+.contactText, .contactSubmit {
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.1) !important;
+    border-radius: 0 !important;
+}
+
+.strainFeatureImage {
+    max-height: 255px;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.1) !important;
+    border-radius: 0 !important;
+}
+
+input::-webkit-input-placeholder {
+    color: #803094 !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: #803094 !important;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #803094 !important;
+}
+
+input:-ms-input-placeholder {
+    color: #803094 !important;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #803094 !important;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: #803094 !important;
+}
+
+textarea::-moz-placeholder { /* Firefox 19+ */
+    color: #803094 !important;
+}
+
+textarea:-ms-input-placeholder {
+    color: #803094 !important;
+}
+
+.small-footer-logo {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+.page-separator {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+.footer-quick-link, .footer-quick-link:hover {
+    color: #3e3f3a;
+}
+
+.gallerySubHead {
+    background-color: beige;
+    margin: auto;
+    padding: 20px 10px 10px 10px;
+}
+
+.gallery {
+    padding-top: 20px;
+}
+
+    .gallery img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.1) !important;
+        border-radius: 0 !important;
+    }
+
+.ggFooterFindUs {
+    background-color: beige;
+    padding: 50px 10px 10px 10px;
+    text-transform: uppercase;
+    margin: auto;
+    color: #5fb43b;
+    font-size: 20px;
+}
+
+.findUsHeading {
+    margin-bottom: 25px;
+}
+
+.footerLogo {
+    margin: 15px;
+}
+
+.navbar-default {
+    background: linear-gradient(to right, #803094,#4e38a6);
+}
+
+.navbar {
+    margin-bottom: 0px;
+    min-height: 55px;
+    border: 0;
+}
+
+.ggMastHeadText {
+    text-shadow: 8px 2px 10px rgba(0,0,0,0.75);
+    font-size: 40pt;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mainHeading, .becomeAVendorHeader {
+    text-transform: uppercase;
+    color: #803094;
+}
+
+.strainHeading{
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: forestgreen;
+    font-size:22px;
+}
+
+.qualitySubLinks a:link {
+    color: black;
+}
+
+.qualitySubLinks  a:visited {
+    color: black;
+}
+
+.qualitySubLinks a:hover {
+    color: black;
+}
+
+.qualitySubLinks a:active {
+    color: black;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ggSubHeadText {
+    text-shadow: 8px 2px 10px rgba(0,0,0,0.75);
+    font-size: 20pt;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0 20px 20px 0;
+}
+
+.repeatingCannabisBackground {
+    background-image: url("../img/GG_Header_Background.jpg");
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: auto;
+}
+
+.progress-bar-info {
+    background-color: #5fb43b; /*linear-gradient(to right, #803094,#4e38a6); */
+}
+
+.progress-bar.effects {
+    background: -webkit-linear-gradient(left, darkgreen 0%,#50C878 100%);
+}
+
+.progress-bar.medical {
+    background: -webkit-linear-gradient(left, orangered 0%,orange 100%);
+}
+
+.progress-bar.negative {
+    background: -webkit-linear-gradient(left, darkgray 0%,dimgray 100%);
+}
+
+.ggFooter {
+    padding: 20px;
+    background-image: url("../img/GG_Header_Background.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: auto;
+}
+
+
+.ggMastHead {
+    padding: 50px;
+}
+
+.ggSubHeadBackground {
+    background-image: url("../img/GGSubHead.jpg");
+    background-size: cover; /* or cover depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: auto;
+    padding: 30px;
+    max-height: 260px;
+    min-height: 200px;
+}
+
+.ggSubHeadText {
+    background-image: url("../img/IntoForestIGo_1024x134.gif");
+    background-size: contain; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: auto;
+    width: 80%;
+    height: 100px;
+    padding: 100px;
+}
+
+.row-center {
+    text-align: center;
+}
+
+.col-center {
+    display: inline-block;
+    float: none;
+}
+
+a.footerEmail:link, a.footerEmail:visited {
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+a.footerEmail:hover, a.footerEmail:active {
+    color: #803094;
+}
+
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #98978b;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-nav > li > a {
+    padding-top: 16.5px;
+    padding-bottom: 16.5px;
+}
+
+.navbar-brand {
+    padding: 0;
+    /*height: 20px;
+    line-height: 80px;*/
+}
+
+/* Flipper CSS */
+
+/* entire container, keeps perspective */
+.flip-container img
+{
+    max-height:133px;
+}
+.flip-container {
+    perspective: 1000px;
+}
+    /* flip the pane when hovered */
+    .flip-container:hover .flipper, .flip-container.hover .flipper {
+        transform: rotateY(180deg);
+    }
+
+    .flip-container .front, .flip-container .back {
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.1) !important;
+        border-radius: 0 !important;
+    }
+
+.flip-container, .front, .back {
+    width: 200px;
+    height: 133px;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+}
+
+/* End Flipper CSS */
+
+.navbar-toggle {
+    /* (100px - button height 34px) / 2 = 33px */
+    /*margin-top: 33px;
+    padding: 9px 10px !important;*/
+}
+
+/*#header-logo-image {
+    height: 100px;
+    width:100px;
+}
+
+#header-logo-image > img {
+    height: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+}*/
+
+#epicVideoPlayerContainer {
+    margin: 0 auto;
+    width: 615px;
+}
+
+    #epicVideoPlayerContainer > video {
+        width: 100%;
+        min-height: 350px;
+        max-width: 615px;
+    }
+
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        /* (100px - line-height of 27px) / 2 = 36.5px */
+        /*padding-top: 36.5px;
+        padding-bottom: 36.5px;*/
+        /*line-height: 27px;*/
+    }
+
+    .navbar-nav {
+        margin: 0 auto;
+        display: table;
+        table-layout: auto;
+        float: none;
+        width: 100%;
+    }
+
+    .navbar-nav > li {
+            display: table-cell;
+            float: none;
+            /*text-align: center;*/
+        }
+}
+
+
+@media (max-width:767px) {
+    .no-padding {
+        margin-left: -15px;
+        margin-right: -15px
+    }
+
+    .ggMastHeadText {
+        font-size: 25pt;
+    }
+}

@@ -1,0 +1,40 @@
+﻿div.BingLocation
+{
+	margin: 0 1em 1em 0;
+	float: left;
+}
+
+.infobox 
+{
+	position: absolute;
+	border: solid 2px #000;
+	background-color: #fff;
+	z-index: 1000;
+	padding: 5px;
+	width: 180px;
+	text-align: center;
+}
+
+.infobox h1 
+{
+	font-size: 1.2em;
+}
+
+label.icon
+{
+	border: 1px dashed #333;
+	float: left;
+	padding: 4px;
+	margin: 0 4px 4px 0;
+}
+
+label.icon img 
+{
+	vertical-align: top;
+}
+
+article.bing-area ul
+{
+	list-style: none;
+	margin-left: 0;
+}

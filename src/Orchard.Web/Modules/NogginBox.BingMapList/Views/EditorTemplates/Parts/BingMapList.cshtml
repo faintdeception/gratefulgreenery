@@ -1,0 +1,149 @@
+﻿@model NogginBox.BingMapList.ViewModels.EditBingMapListViewModel
+@using NogginBox.BingMapList
+@using NogginBox.BingMapList.Models
+@{
+	Style.Include("map");
+	Script.Require("jQuery");
+	Script.Include("http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&onscriptload=initMap");
+	Script.Include("maplist.js");
+	
+	// Set size with units
+	var width = (Model.Width != null) ? Model.Width + "pt" : "100%";
+	var height = Model.Height + "pt";
+}
+@using(Script.Foot()) {
+<script type="text/javascript">
+	var map;
+	var pin;
+
+	function getDimension(d) {
+		return (d === "") ? "100%" : parseInt(d, 10);
+	}
+
+	function onTextLatLongChange() {
+		var loc = newLocation($("#@Html.IdFor(m => m.CenterLatitudeStr)").val(), $("#@Html.IdFor(m => m.CenterLongitudeStr)").val());
+		map.setView({center:loc});
+	}
+
+	function onTextMapTypeChange() {
+		map.setView({mapTypeId: $("#@Html.IdFor(m => m.MapType)").val()});
+	}
+
+	function resetMapSize() {
+		var w = getDimension($("#@Html.IdFor(m => m.Width)").val());
+		var h = getDimension($("#@Html.IdFor(m => m.Height)").val());
+		$("#BingEditMap").width(w);
+		$("#BingEditMap").height(h);
+		map.setOptions({width: w, height: h});
+	}
+
+	function onTextHeightChange() {
+		resetMapSize();
+	}
+
+	function onTextWidthChange() {
+		resetMapSize();
+	}
+
+	function onViewChange() {
+		var z = Math.floor(map.getZoom());
+		$("#@Html.IdFor(m => m.Zoom)").val(z);
+
+		var loc = map.getCenter();
+		$("#@Html.IdFor(m => m.CenterLatitudeStr)").val(loc.latitude);
+		$("#@Html.IdFor(m => m.CenterLongitudeStr)").val(loc.longitude);
+	}
+
+	function onTypeChange() {
+		$("#@Html.IdFor(m => m.MapType)").val(map.getMapTypeId());
+	}
+
+	function onZoomTextSet() {
+		var z = parseInt($("#@Html.IdFor(m => m.Zoom)").val(), 10);
+		map.setView({zoom: z});
+	}
+
+	function initMap() {
+		var loc = newLocation(@Model.CenterLatitudeStr, @Model.CenterLongitudeStr);
+		map = newMap("BingEditMap", loc, @Model.Zoom, "@(Ajax.JavaScriptStringEncode(Model.MapType))");
+
+		@{var c = 0; var cCount = Model.BingLocations.Count() - 1;}
+		var pins = [
+		@foreach (BingLocationPart location in Model.BingLocations)
+		{<text>{Id: @(location.ContentItem.Id), Lat: @Html.toInvariantCultureString(location.Latitude), Lng: @Html.toInvariantCultureString(location.Longitude), Title: "@Ajax.JavaScriptStringEncode(Model.Titles[c])", Icon: "@Ajax.JavaScriptStringEncode(location.MapIcon)", Url: "@Url.ItemDisplayUrl(location.ContentItem)"}</text>if (c < cCount) { @(",")}c++;}];
+		addPins(pins, map, "@Model.MapIconFolder");
+
+		Microsoft.Maps.Events.addHandler(map, "viewchangeend", onViewChange);
+		Microsoft.Maps.Events.addHandler(map, "maptypechanged", onTypeChange);
+	}
+	$(window).load(initMap);
+
+	$(function() {
+		$("fieldset legend").expandoControl(function (controller) { return controller.nextAll(".expando"); }, { collapse: true, remember: false });
+		$("#@Html.IdFor(m => m.Zoom)").change(onZoomTextSet);
+		$("#@Html.IdFor(m => m.Width)").change(onTextWidthChange);
+		$("#@Html.IdFor(m => m.Height)").change(onTextHeightChange);
+		$("#@Html.IdFor(m => m.CenterLatitudeStr)").change(onTextLatLongChange);
+		$("#@Html.IdFor(m => m.CenterLongitudeStr)").change(onTextLatLongChange);
+		$("#@Html.IdFor(m => m.MapType)").change(onTextMapTypeChange);
+	});
+</script>
+}
+<fieldset>
+	<legend>Bing map list area</legend>
+	<div id="BingEditMap" class="BingLocation" style="position:relative; width:@(width); height:@(height);"></div>	
+</fieldset>
+
+
+<fieldset style="clear: both;">
+	<legend>@T("Map properties")</legend>
+	<div class="expando">
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Width)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Width)
+			@Html.ValidationMessageFor(m => m.Width)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Height)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Height)
+			@Html.ValidationMessageFor(m => m.Height)
+		</div>
+	
+		<div class="editor-label">
+			@Html.LabelFor(m => m.CenterLatitudeStr)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.CenterLatitudeStr)
+			@Html.ValidationMessageFor(m => m.CenterLatitudeStr)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.CenterLongitudeStr)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.CenterLongitudeStr)
+			@Html.ValidationMessageFor(m => m.CenterLongitudeStr)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.Zoom)
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Zoom)
+			@Html.ValidationMessageFor(m => m.Zoom)
+		</div>
+
+		<div class="editor-label">
+			@Html.LabelFor(m => m.MapType)
+		</div>
+		<div class="editor-field">
+			@Html.DropDownListFor(m => m.MapType, Model.MapTypeList)
+			@Html.ValidationMessageFor(m => m.MapType)
+		</div>
+	</div>
+</fieldset>

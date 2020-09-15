@@ -1,0 +1,8 @@
+Name: GratefulGreenery
+Author: The Orchard Team
+Website: http://www.orchardproject.net
+Description: Description for the theme
+Version: 1.0
+BaseTheme: responsive-theme-for-developers-orchard-cms
+# todo: provide tags
+# Tags: Classic, Serif

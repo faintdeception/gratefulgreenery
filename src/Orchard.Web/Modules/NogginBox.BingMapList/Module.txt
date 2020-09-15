@@ -1,0 +1,13 @@
+Name: Bing Map List
+AntiForgery: enabled
+Author: Richard Garside - NogginBox
+Website: http://www.nogginbox.co.uk/BingMapList
+Version: 1.6
+OrchardVersion: 1.8
+Description: Show locations and lists of locations on a Bing Map.
+Features:
+    NogginBox.BingMapList:
+        Name: Bing Map List
+        Description: Show locations and lists of locations on a Bing Map.
+        Category: Geolocation
+        Dependencies: Orchard.MediaLibrary

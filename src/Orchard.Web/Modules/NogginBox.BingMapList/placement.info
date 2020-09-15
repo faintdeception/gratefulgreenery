@@ -1,0 +1,10 @@
+﻿<Placement>
+	<Place Parts_BingLocation_Edit="Content:2"/>
+	<Place Parts_BingMapList_Edit="Content:2"/>
+	<Place Parts_Common_Metadata="-"/>
+	<Place Parts_Common_Metadata_Summary="-"/>
+	<Match DisplayType="Detail">
+		<Place Parts_BingLocation="Content:3"/>
+		<Place Parts_BingMapList="Content:6"/>
+	</Match>
+</Placement>

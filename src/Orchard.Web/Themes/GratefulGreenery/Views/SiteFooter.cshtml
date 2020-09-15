@@ -1,0 +1,84 @@
+﻿@{ 
+    var clock = WorkContext.Resolve<Orchard.Services.IClock>();
+}
+<div class="site-footer">
+    <div class="container-fluid no-padding">
+        <div class="row ggFooterFindUs">
+            <div class="col-md-12 text-center">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center findUsHeading">Find Us</div>
+                        </div>
+                    </div>
+                    <div class="row d-flex">
+                        <div class="col-md-4 col-sm-4 col-xs-4 text-center d-flex align-items-center justify-content-center">
+                            <a href="https://www.leafly.com/">
+                                <img class="img-fluid footerLogo small-footer-logo" src="@Href("~/Themes/GratefulGreenery/img/Logos/Leafly_82x24.gif")" />
+                            </a>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                            <a href="https://orders.confidentcannabis.com/#!/gallery">
+                                <img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/FPO_DispensaryLogos/FPO_Dispensary1_86x86.gif")" />
+                            </a>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4 text-center d-flex align-items-center justify-content-center">
+                            <a href="https://www.weedmaps.com">
+                                <img class="img-fluid footerLogo  small-footer-logo" src="@Href("~/Themes/GratefulGreenery/img/Logos/Weedmaps_118x28.gif")" />
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ggFooter">
+            <div class="col-md-12 text-center">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <div><img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/Logos/GG_Logo_170x170.gif")" /></div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="row row-center">
+                            <div class="col-md-3 col-sm-2 col-xs-6 col-center text-center">
+                                <a href="https://www.instagram.com/thegratefulgreenery/?hl=en">
+                                    <img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/Logos/Instagram_46x46.gif")" />
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-6 col-center text-center">
+                                <a href="https://www.facebook.com/gratefulgreenery">
+                                    <img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/Logos/FindUs-FB-RGB-BRC-Site-500.png")" />
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 col-center text-center disabled">
+                                <a href="https://twitter.com/thegratefulgre1">
+                                    <img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/Logos/Twitter_Logo_Blue.png")" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div><a class="footerEmail" href="mailto:gratefulgreenery@gmail.com">gratefulgreenery@gmail.com</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div><img class="img-fluid footerLogo" src="@Href("~/Themes/GratefulGreenery/img/Logos/MasonFarm_Logo_184x167.gif")" /></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div>&copy; @clock.UtcNow.Year Grateful Greenery &nbsp;|&nbsp; <a href="/Partners" class="footer-quick-link"> Partners </a></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-9 col-sm-6">
+            
+        </div>
+        <div class="col-xs-3 col-sm-6 text-right">
+
+        </div>
+    </div>
+</div>

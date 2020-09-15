@@ -1,0 +1,35 @@
+﻿@using NogginBox.BingMapList
+@using NogginBox.BingMapList.Models
+@{
+	Style.Include("map");
+	Script.Require("jQuery");
+	Script.Include("http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0");
+	Script.Include("maplist.js");
+	var mapIndex = (Context.Items["NogginBox.BingMapList.Index"] as int?) ?? 0;
+	Context.Items["NogginBox.BingMapList.Index"] = mapIndex + 1;
+
+	// Set size with units
+	var width = (Model.Width != null) ? Model.Width + "pt" : "100%";
+	var height = Model.Height + "pt";
+}
+@using(Script.Foot()) {
+<script type="text/javascript">
+	function initMap() {
+		var map = newMap("BingLocation@(mapIndex)", newLocation(@Html.toInvariantCultureString((float)Model.CenterLatitude), @Html.toInvariantCultureString((float)Model.CenterLongitude)), @Model.Zoom, "@(Ajax.JavaScriptStringEncode(Model.MapType))");
+
+		@{var c = 1;}
+		var pins = [
+		@foreach (BingLocationPart location in Model.BingLocations)
+		{<text>{Id: @(location.ContentItem.Id), Lat: @Html.toInvariantCultureString((float)location.Latitude), Lng: @Html.toInvariantCultureString((float)location.Longitude), Title: "@Ajax.JavaScriptStringEncode(Model.Titles[c-1])", Icon: "@Ajax.JavaScriptStringEncode(location.MapIcon)", Url: "@Url.ItemDisplayUrl(location.ContentItem)"}</text>if (c < Model.LocationsCount) { @(",")}c++;}];
+		addPins(pins, map, "@Model.MapIconFolder");
+		$(".bing-place").hover(function(e){
+			hoverStart(e.currentTarget.id.substr(3));
+		}, function(e){
+			hoverEnd(e.currentTarget.id.substr(3));
+		});
+	}
+	$(window).load(initMap);
+</script>
+}
+<div id="BingLocation@(mapIndex)" class="BingLocation" style="position:relative; width:@(width); height:@(height);"></div>
+@Display(Model.LocationContentItems)

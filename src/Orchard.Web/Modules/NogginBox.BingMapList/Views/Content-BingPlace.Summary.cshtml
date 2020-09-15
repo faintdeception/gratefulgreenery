@@ -1,0 +1,18 @@
+﻿@using Orchard.Utility.Extensions;
+@* Overriding summary template for BingPlace add id to article that will allow us to add extra js to highlight pins *@
+<article id="ci-@Model.ContentItem.Id" class="content-item bing-place">
+	<header>
+		@Display(Model.Header)
+		@if (Model.Meta != null) {
+		<div class="metadata">
+			@Display(Model.Meta)
+		</div>
+		}
+	</header>
+	@Display(Model.Content)
+	@if(Model.Footer != null) {
+	<footer>
+		@Display(Model.Footer)
+	</footer>
+	}
+</article>

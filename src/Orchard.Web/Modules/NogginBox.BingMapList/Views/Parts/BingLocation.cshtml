@@ -1,0 +1,26 @@
+﻿@using NogginBox.BingMapList
+@{
+	Style.Include("map");
+	Script.Require("jQuery");
+	Script.Include("http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0");
+	Script.Include("maplist.js");
+	var mapIndex = (Context.Items["NogginBox.BingMapList.Index"] as int?) ?? 0;
+	Context.Items["NogginBox.BingMapList.Index"] = mapIndex + 1;
+
+	// Set size with units
+	var width = (Model.Width != null) ? Model.Width + "pt" : "100%";
+	var height = Model.Height + "pt";
+
+}
+@using(Script.Foot()) {
+<script type="text/javascript">
+	function initMap() {
+		var loc = newLocation(@Html.toInvariantCultureString((float)Model.Latitude), @Html.toInvariantCultureString((float)Model.Longitude));
+		var map = newMap("BingLocation@(mapIndex)", loc, @Model.Zoom, "@(Ajax.JavaScriptStringEncode(Model.MapType))");
+		var pin = newPin(loc, "@Model.MapIconFolder", "@Ajax.JavaScriptStringEncode((String)Model.MapIcon)");
+		map.entities.push(pin);
+	}
+	$(window).load(initMap);
+</script>
+}
+<div id="BingLocation@(mapIndex)" class="BingLocation" style="position:relative; width:@(width); height:@(height);"></div>
